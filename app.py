@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, \
     url_for, request, session, flash
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+from flask_heroku import Heroku
 
 
 # create the application object
@@ -12,6 +13,7 @@ app = Flask(__name__)
 app.secret_key = 'my precious'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/polex'
 
+heroku = Heroku(app)
 db = SQLAlchemy(app)
 
 # Create our database model
