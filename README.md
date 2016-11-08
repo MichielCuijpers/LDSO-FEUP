@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Polex.org - LDSO-FEUP
 
 ###Group
@@ -8,3 +9,7 @@
 - Luís Carvalho // carvalhofilipe1995@gmail.com
 - Luís Telmo Costa // luistelmocosta@gmail.com
 - Pedro Arnaldo // refpedroarnaldo@gmail.com
+=======
+# LDSOteste
+tests 
+>>>>>>> a417f9cdb6f9e3ba409a46cf18255f5305eba16e
