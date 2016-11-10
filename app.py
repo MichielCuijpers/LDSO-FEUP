@@ -8,7 +8,7 @@ from flask_login import LoginManager, UserMixin, \
 
 app = Flask(__name__)
 
-
+app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/polex'
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
