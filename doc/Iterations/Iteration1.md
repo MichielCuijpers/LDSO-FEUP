@@ -1,8 +1,9 @@
 ### Product backlog refinement 
 - Done
 
-### Staging server 
-- http://polexorg.herokuapp.com/login
+### Servers
+ [Staging Server](http://polexorg-stage.herokuapp.com/)
+ [Production Server](http://polexorg-pro.herokuapp.com/)
 
 ### Acceptance tests
 
