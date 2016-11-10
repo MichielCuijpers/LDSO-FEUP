@@ -6,13 +6,10 @@
  - [Production Server](http://polexorg-pro.herokuapp.com/)
 
 ### Acceptance tests
-
-
-### Sprint planning
-
+- Done
 
 ### Unit tests
-
+- Luis Costa //TODO
 
 ### Product increment
 - Summary: The Product Increment is the sum of all Product Backlog items completed during a Sprint and all previous Sprints. At the end of a Sprint the new Product Increment must be in a usable condition and meet the Scrum Team's Definition of Done.
@@ -21,15 +18,6 @@ The increment must consist of thoroughly tested code that has been built into an
 If everything works fine and the Development Team has estimated well, the Product Increment includes all items, which were planned in the Sprint Backlog, tested and documented.
 
 ### Continuous integration
-
-
-### Sprint review
-
-
-### Sprint retrospective
-
-
-### Sprint review
 
 
 ### Estimated versus Done
