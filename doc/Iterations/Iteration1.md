@@ -9,7 +9,7 @@
 - Done
 
 ### Unit tests
-- Luis Costa //TODO
+- Luis Costa //In progres
 
 ### Product increment
 - Summary: The Product Increment is the sum of all Product Backlog items completed during a Sprint and all previous Sprints. At the end of a Sprint the new Product Increment must be in a usable condition and meet the Scrum Team's Definition of Done.
