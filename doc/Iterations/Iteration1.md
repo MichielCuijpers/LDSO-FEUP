@@ -2,8 +2,8 @@
 - Done
 
 ### Servers
- [Staging Server](http://polexorg-stage.herokuapp.com/)
- [Production Server](http://polexorg-pro.herokuapp.com/)
+ - [Staging Server](http://polexorg-stage.herokuapp.com/)
+ - [Production Server](http://polexorg-pro.herokuapp.com/)
 
 ### Acceptance tests
 
