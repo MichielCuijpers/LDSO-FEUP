@@ -28,7 +28,7 @@
 
           <li><a href="/about">About</a></li>
           {% if not g.user.is_authenticated %}
-          <li><a href="/signin">Sign In</a></li>
+          <li><a href="/signup">Sign In</a></li>
           <li><a href="/login">LogIn</a></li>
           {% endif %}
           <li><form class="navbar-form" role="search">
@@ -53,6 +53,11 @@
   <header>
     <div class="container">
       <h1 class="title">Polex.Org</h1>
+      <!-- messages -->
+      {% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}
+      
     </div>
   </header>
 
@@ -60,6 +65,8 @@
 
   {% block content %}
   {% endblock %}
+
+
 
 </body>
 </html>

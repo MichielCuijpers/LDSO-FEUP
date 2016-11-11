@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect, url_for, g
+from flask import Flask, render_template, request, session, redirect, url_for, g, flash
 from models import db, User
 from forms import SignupForm, LoginForm
 from flask_login import LoginManager, UserMixin, \
@@ -65,7 +65,7 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
-
+  error = None
   print db
 
   form = LoginForm()
@@ -82,17 +82,21 @@ def login():
 
       user = User.query.filter_by(email=email).first()
       if user is not None and user.check_password(password):
-        login_user(user, remember=True) 
+        login_user(user, remember=True)
+        flash('You were logged in. Go Crazy. ')
         return redirect(url_for('home'))
       else:
+        error = 'Invalid username or password.'
         return redirect(url_for('login'))
 
   elif request.method == 'GET':
     return render_template('login.html', form=form)
 
 @app.route("/logout")
+@login_required
 def logout():
   logout_user()
+  flash('You were logged out.')
   return redirect(url_for('index'))
 
 @app.route("/home", methods=["GET", "POST"])
