@@ -18,3 +18,4 @@ Werkzeug==0.9.6
 Whoosh==2.7.4
 WTForms==2.1
 Flask-WhooshAlchemy==0.8
+psycopg2==2.6.2
