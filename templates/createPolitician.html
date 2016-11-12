@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero-section">
+    <div class="container">
+
+      <br>
+
+      <div class="container">
+      <h4>Add Entry</h4>
+      <form method="POST" action="/politician">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.publicName.label }}
+          {{ form.publicName }}
+        </div>
+
+        <div class="form-group">
+          {{ form.completeName.label }}
+          {{ form.completeName }}
+        </div>
+
+        {{ form.submit(class="btn-primary") }}
+
+      </form>
+      </div>
+
+
+    </div>
+  </main>
+{% endblock %}

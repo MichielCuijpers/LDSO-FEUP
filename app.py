@@ -112,10 +112,14 @@ def home():
   politics = db.session.query(Politic).all()
   return render_template("home.html", politics= politics)
 
+
+#@app.route("/politician/<int:page>", methods=["GET", "POST"])
+@app.route("/politician/<int:idPolitician>", methods=["GET", "POST"])
 @app.route("/politician", methods=["GET", "POST"])
 @login_required
-def politician():
-
+def politician(idPolitician=1):
+  politician = Politic.query.filter_by(idPolitician=idPolitician).first()
+  print politician
   form = PoliticForm()
 
   if request.method == "POST":
@@ -128,7 +132,7 @@ def politician():
       return redirect(url_for('home'))
 
   elif request.method == "GET":
-    return render_template("politician.html", form=form)
+    return render_template("politician.html", form=form, idPolitician=idPolitician, politician=politician)
 
   
 
