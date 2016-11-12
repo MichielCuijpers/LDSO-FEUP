@@ -1,7 +1,8 @@
 import os
+import flask_whooshalchemy as wa
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
-from models import db, User
-from forms import SignupForm, LoginForm
+from models import db, User, Politic
+from forms import SignupForm, LoginForm, PoliticForm
 from flask_login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 
@@ -11,11 +12,16 @@ app = Flask(__name__)
 #print(os.environ['APP_SETTINGS'])
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['WHOOSH_BASE']='whoosh' 
 db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
+
+wa.whoosh_index(app, Politic)
+
+
 
 
 
@@ -103,13 +109,36 @@ def logout():
 @login_required
 def home():
 
+  politics = db.session.query(Politic).all()
+  return render_template("home.html", politics= politics)
 
-  return render_template("home.html")
-
-@app.route("/politic")
+@app.route("/politician", methods=["GET", "POST"])
 @login_required
-def politic():
-  return render_template("politic.html")
+def politician():
+
+  form = PoliticForm()
+
+  if request.method == "POST":
+    if form.validate() == False:
+      return render_template('politician.html', form=form)
+    else:
+      newpolitician = Politic(form.publicName.data, form.completeName.data)
+      db.session.add(newpolitician)
+      db.session.commit()
+      return redirect(url_for('home'))
+
+  elif request.method == "GET":
+    return render_template("politician.html", form=form)
+
+  
+
+@app.route('/search')
+def search():
+  politics = Politic.query.whoosh_search(request.args.get('query')).all()
+  print politics
+
+  return render_template('home.html', politics=politics)  
+
 
 @app.before_request
 def before_request():

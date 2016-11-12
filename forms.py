@@ -15,5 +15,6 @@ class LoginForm(Form):
   submit = SubmitField("Sign in")
 
 class PoliticForm(Form):
-  address = StringField('Address', validators=[DataRequired("Please enter an address.")])
-  submit = SubmitField("Search")
+  publicName = StringField('Public Name', validators=[DataRequired("Please enter politician public name.")])
+  completeName = StringField('Complete Name', validators=[DataRequired("Please enter politician complete name.")])
+  submit = SubmitField('Add Politician')

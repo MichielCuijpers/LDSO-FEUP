@@ -6,6 +6,16 @@
       
     <h1>Home</h1>
 
+    <div class="container">
+      <h3>Politics:</h3>
+      {% for politic in politics %}
+        <strong>Public Name: </strong>{{politic.publicName}} <br>
+        <strong>Complete Name: </strong>{{politic.completeName}} <br>
+
+        <br>
+      {% endfor %}
+      </div>
+
     </div>
   </main>
 {% endblock %}

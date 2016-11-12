@@ -31,9 +31,9 @@
           <li><a href="/signup">Sign In</a></li>
           <li><a href="/login">LogIn</a></li>
           {% endif %}
-          <li><form class="navbar-form" role="search">
+          <li><form class="navbar-form" method="GET" action = "search">
 
-              <input type="text" class="form-control" placeholder="Search" name="q">
+              <input type="text" class="form-control" placeholder="Search" name="query" id="query">
               <button type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
               </button>

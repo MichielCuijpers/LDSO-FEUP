@@ -41,12 +41,14 @@ class User(db.Model):
     return check_password_hash(self.pwdhash, password)
 
 class Politic(db.Model):
+  __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'politics'
 
   idPolitician = db.Column(db.Integer, primary_key=True)
   publicName = db.Column(db.String(150))
   completeName = db.Column(db.String(300))
 
-  def __repr__(self):
-    return '<Politic %r>' % (self.body)
-   
+  def __init__(self, publicName, completeName):
+    self.publicName = publicName.title()
+    self.completeName = completeName.title()
+    
