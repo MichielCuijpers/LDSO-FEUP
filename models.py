@@ -26,7 +26,7 @@ class User(db.Model):
   	return True
 
   def is_anonymous(self):
-        # False as we do not support annonymity
+        #False as we do not support annonymity
     return False
 
   def __init__(self, firstname, lastname, email, password):
