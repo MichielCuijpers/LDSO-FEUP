@@ -54,4 +54,23 @@ class Politic(db.Model):
   def __init__(self, publicName, completeName, startDate, endDate):
     self.publicName = publicName.title()
     self.completeName = completeName.title()
+    self.startDate = startDate.title()
+    self.endDate = endDate.title()
+
+class Proposal(db.Model):
+  __searchable__ = ['publicName', 'completeName']
+  __tablename__ = 'proposals'
+
+  idProposal = db.Column(db.Integer, primary_key = True)
+  nameProposal = db.Column(db.String(120))
+  dateProposal = db.Column(db.Date, default = datetime.datetime.utcnow)
+  description = db.Column(db.String(500))
+  linkProposal = db.Column(db.String(200))
+
+  def __init__(self, nameProposal, dateProposal, description, linkProposal):
+    self.nameProposal = nameProposal.title()
+    self.dateProposal = dateProposal.title()
+    self.description = description.title()
+    self.linkProposal = linkProposal.title()
+
     
