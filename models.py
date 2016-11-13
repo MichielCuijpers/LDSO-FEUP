@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import generate_password_hash, check_password_hash
+import datetime
 
 
 db = SQLAlchemy()
@@ -47,8 +48,10 @@ class Politic(db.Model):
   idPolitician = db.Column(db.Integer, primary_key=True)
   publicName = db.Column(db.String(150))
   completeName = db.Column(db.String(300))
+  startDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+  endDate = db.Column(db.Date, default = datetime.datetime.utcnow)
 
-  def __init__(self, publicName, completeName):
+  def __init__(self, publicName, completeName, startDate, endDate):
     self.publicName = publicName.title()
     self.completeName = completeName.title()
     

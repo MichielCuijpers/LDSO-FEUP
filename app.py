@@ -134,7 +134,25 @@ def politician(idPolitician=1):
   elif request.method == "GET":
     return render_template("politician.html", form=form, idPolitician=idPolitician, politician=politician)
 
-  
+@app.route("/create_politician", methods=["GET", "POST"])
+@login_required
+def create_politician():
+  form = PoliticForm()
+
+  if request.method == "POST":
+    flash(form.errors)
+    flash(request.form.get('date'))
+    flash(request.form.get('date2'))
+    flash(form.validate())
+    newpolitician = Politic(form.publicName.data, form.completeName.data, request.form.get('date'), request.form.get('date2'))
+    print form.startDate.data
+    db.session.add(newpolitician)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+  elif request.method == "GET":
+    return render_template("createPolitician.html", form=form)
+
 
 @app.route('/search')
 def search():
