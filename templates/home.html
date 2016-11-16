@@ -13,13 +13,14 @@
       {% for politic in politics %}
         <strong>Public Name: </strong>{{politic.publicName}} <br>
         <strong>Complete Name: </strong>{{politic.completeName}} <br>
+
         <a href="{{ url_for('politician', idPolitician=politic.idPolitician) }}"  class="btn btn-default btn-sm" role="button"> See Politician </a>
+
+      
 
 
         <br>
       {% endfor %}
-
-
       </div>
 
 
