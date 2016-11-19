@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm 
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, validators
 from wtforms.validators import DataRequired, Email, Length
 from wtforms.fields.html5 import DateField
@@ -21,3 +21,10 @@ class PoliticForm(FlaskForm):
   startDate = DateField('Start Date', format='%m-%d-%Y', validators=[DataRequired("Please enter the politician start Date.")])
   endDate = DateField('End Date', format='%m-%d-%Y', validators=(validators.Optional(),))
   submit = SubmitField('Add Politician', validators=(validators.Optional(),))
+
+class OrganizationForm(FlaskForm):
+  publicName = StringField('Public Name', validators=[DataRequired("Please enter organization public name.")])
+  completeName = StringField('Complete Name', validators=[DataRequired("Please enter organization complete name.")])
+  startDate = DateField('Start Date', format='%m-%d-%Y', validators=[DataRequired("Please enter the organization start Date.")])
+  endDate = DateField('End Date', format='%m-%d-%Y', validators=(validators.Optional(),))
+  submit = SubmitField('Add Organization', validators=(validators.Optional(),))

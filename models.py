@@ -16,7 +16,7 @@ class User(db.Model):
   #-----login requirements-----
   def is_active(self):
     #all users are active
-    return True 
+    return True
 
   def get_id(self):
         # returns the user e-mail. not sure who calls this
@@ -34,12 +34,13 @@ class User(db.Model):
     self.lastname = lastname.title()
     self.email = email.lower()
     self.set_password(password)
-     
+
   def set_password(self, password):
     self.pwdhash = generate_password_hash(password)
 
   def check_password(self, password):
     return check_password_hash(self.pwdhash, password)
+
 
 class Politic(db.Model):
   __searchable__ = ['publicName', 'completeName']
@@ -57,6 +58,24 @@ class Politic(db.Model):
     self.startDate = startDate.title()
     self.endDate = endDate.title()
 
+
+class Organization(db.Model):
+  __searchable__ = ['publicName', 'completeName']
+  __tablename__ = 'organization'
+
+  idOrganization = db.Column(db.Integer, primary_key=True)
+  publicName = db.Column(db.String(150))
+  completeName = db.Column(db.String(300))
+  startDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+  endDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+
+  def __init__(self, publicName, completeName, startDate, endDate):
+    self.publicName = publicName.title()
+    self.completeName = completeName.title()
+    self.startDate = startDate.title()
+    self.endDate = endDate.title()
+
+
 class Proposal(db.Model):
   __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'proposals'
@@ -72,5 +91,3 @@ class Proposal(db.Model):
     self.dateProposal = dateProposal.title()
     self.description = description.title()
     self.linkProposal = linkProposal.title()
-
-    

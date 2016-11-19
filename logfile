@@ -1,0 +1,314 @@
+LOG:  database system was shut down at 2016-11-14 16:33:17 WET
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "luiscarvalho" does not exist
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 3260) running in data directory "/usr/local/var/postgres"?
+FATAL:  database "luiscarvalho" does not exist
+FATAL:  database "luiscarvalho" does not exist
+ERROR:  syntax error at or near "psql" at character 1
+STATEMENT:  psql polex
+	exit
+	exit
+	exti;
+ERROR:  syntax error at or near "exit" at character 1
+STATEMENT:  exit;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.alembic_version OWNER TO luiscosta;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.politics OWNER TO luiscosta;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."politics_idPolitician_seq" OWNER TO luiscosta;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.proposals OWNER TO luiscosta;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."proposals_idProposal_seq" OWNER TO luiscosta;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users OWNER TO luiscosta;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users_uid_seq OWNER TO luiscosta;
+ERROR:  role "postgres" does not exist
+STATEMENT:  REVOKE ALL ON SCHEMA public FROM postgres;
+ERROR:  role "postgres" does not exist
+STATEMENT:  GRANT ALL ON SCHEMA public TO postgres;
+ERROR:  relation "alembic_version" already exists
+STATEMENT:  CREATE TABLE alembic_version (
+	    version_num character varying(32) NOT NULL
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.alembic_version OWNER TO luiscosta;
+ERROR:  relation "politics" already exists
+STATEMENT:  CREATE TABLE politics (
+	    "idPolitician" integer NOT NULL,
+	    "publicName" character varying(150),
+	    "completeName" character varying(300),
+	    "startDate" date,
+	    "endDate" date
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.politics OWNER TO luiscosta;
+ERROR:  relation "politics_idPolitician_seq" already exists
+STATEMENT:  CREATE SEQUENCE "politics_idPolitician_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."politics_idPolitician_seq" OWNER TO luiscosta;
+ERROR:  relation "proposals" already exists
+STATEMENT:  CREATE TABLE proposals (
+	    "idProposal" integer NOT NULL,
+	    "nameProposal" character varying(120),
+	    "dateProposal" date,
+	    description character varying(500),
+	    "linkProposal" character varying(200)
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.proposals OWNER TO luiscosta;
+ERROR:  relation "proposals_idProposal_seq" already exists
+STATEMENT:  CREATE SEQUENCE "proposals_idProposal_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."proposals_idProposal_seq" OWNER TO luiscosta;
+ERROR:  relation "users" already exists
+STATEMENT:  CREATE TABLE users (
+	    uid integer NOT NULL,
+	    firstname character varying(100),
+	    lastname character varying(100),
+	    email character varying(120),
+	    pwdhash character varying(150)
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users OWNER TO luiscosta;
+ERROR:  relation "users_uid_seq" already exists
+STATEMENT:  CREATE SEQUENCE users_uid_seq
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users_uid_seq OWNER TO luiscosta;
+ERROR:  duplicate key value violates unique constraint "politics_pkey"
+DETAIL:  Key ("idPolitician")=(30) already exists.
+CONTEXT:  COPY politics, line 1
+STATEMENT:  COPY politics ("idPolitician", "publicName", "completeName", "startDate", "endDate") FROM stdin;
+ERROR:  duplicate key value violates unique constraint "proposals_pkey"
+DETAIL:  Key ("idProposal")=(1) already exists.
+CONTEXT:  COPY proposals, line 1
+STATEMENT:  COPY proposals ("idProposal", "nameProposal", "dateProposal", description, "linkProposal") FROM stdin;
+ERROR:  duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(t@t.pt) already exists.
+CONTEXT:  COPY users, line 1
+STATEMENT:  COPY users (uid, firstname, lastname, email, pwdhash) FROM stdin;
+ERROR:  multiple primary keys for table "politics" are not allowed
+STATEMENT:  ALTER TABLE ONLY politics
+	    ADD CONSTRAINT politics_pkey PRIMARY KEY ("idPolitician");
+ERROR:  multiple primary keys for table "proposals" are not allowed
+STATEMENT:  ALTER TABLE ONLY proposals
+	    ADD CONSTRAINT proposals_pkey PRIMARY KEY ("idProposal");
+ERROR:  relation "users_email_key" already exists
+STATEMENT:  ALTER TABLE ONLY users
+	    ADD CONSTRAINT users_email_key UNIQUE (email);
+ERROR:  multiple primary keys for table "users" are not allowed
+STATEMENT:  ALTER TABLE ONLY users
+	    ADD CONSTRAINT users_pkey PRIMARY KEY (uid);
+ERROR:  role "postgres" does not exist
+STATEMENT:  REVOKE ALL ON SCHEMA public FROM postgres;
+ERROR:  role "postgres" does not exist
+STATEMENT:  GRANT ALL ON SCHEMA public TO postgres;
+FATAL:  role "postgres" does not exist
+ERROR:  relation "alembic_version" already exists
+STATEMENT:  CREATE TABLE alembic_version (
+	    version_num character varying(32) NOT NULL
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.alembic_version OWNER TO luiscosta;
+ERROR:  relation "politics" already exists
+STATEMENT:  CREATE TABLE politics (
+	    "idPolitician" integer NOT NULL,
+	    "publicName" character varying(150),
+	    "completeName" character varying(300),
+	    "startDate" date,
+	    "endDate" date
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.politics OWNER TO luiscosta;
+ERROR:  relation "politics_idPolitician_seq" already exists
+STATEMENT:  CREATE SEQUENCE "politics_idPolitician_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."politics_idPolitician_seq" OWNER TO luiscosta;
+ERROR:  relation "proposals" already exists
+STATEMENT:  CREATE TABLE proposals (
+	    "idProposal" integer NOT NULL,
+	    "nameProposal" character varying(120),
+	    "dateProposal" date,
+	    description character varying(500),
+	    "linkProposal" character varying(200)
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.proposals OWNER TO luiscosta;
+ERROR:  relation "proposals_idProposal_seq" already exists
+STATEMENT:  CREATE SEQUENCE "proposals_idProposal_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."proposals_idProposal_seq" OWNER TO luiscosta;
+ERROR:  relation "users" already exists
+STATEMENT:  CREATE TABLE users (
+	    uid integer NOT NULL,
+	    firstname character varying(100),
+	    lastname character varying(100),
+	    email character varying(120),
+	    pwdhash character varying(150)
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users OWNER TO luiscosta;
+ERROR:  relation "users_uid_seq" already exists
+STATEMENT:  CREATE SEQUENCE users_uid_seq
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users_uid_seq OWNER TO luiscosta;
+ERROR:  duplicate key value violates unique constraint "politics_pkey"
+DETAIL:  Key ("idPolitician")=(30) already exists.
+CONTEXT:  COPY politics, line 1
+STATEMENT:  COPY politics ("idPolitician", "publicName", "completeName", "startDate", "endDate") FROM stdin;
+ERROR:  duplicate key value violates unique constraint "proposals_pkey"
+DETAIL:  Key ("idProposal")=(1) already exists.
+CONTEXT:  COPY proposals, line 1
+STATEMENT:  COPY proposals ("idProposal", "nameProposal", "dateProposal", description, "linkProposal") FROM stdin;
+ERROR:  duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(t@t.pt) already exists.
+CONTEXT:  COPY users, line 1
+STATEMENT:  COPY users (uid, firstname, lastname, email, pwdhash) FROM stdin;
+ERROR:  multiple primary keys for table "politics" are not allowed
+STATEMENT:  ALTER TABLE ONLY politics
+	    ADD CONSTRAINT politics_pkey PRIMARY KEY ("idPolitician");
+ERROR:  multiple primary keys for table "proposals" are not allowed
+STATEMENT:  ALTER TABLE ONLY proposals
+	    ADD CONSTRAINT proposals_pkey PRIMARY KEY ("idProposal");
+ERROR:  relation "users_email_key" already exists
+STATEMENT:  ALTER TABLE ONLY users
+	    ADD CONSTRAINT users_email_key UNIQUE (email);
+ERROR:  multiple primary keys for table "users" are not allowed
+STATEMENT:  ALTER TABLE ONLY users
+	    ADD CONSTRAINT users_pkey PRIMARY KEY (uid);
+ERROR:  role "postgres" does not exist
+STATEMENT:  REVOKE ALL ON SCHEMA public FROM postgres;
+ERROR:  role "postgres" does not exist
+STATEMENT:  GRANT ALL ON SCHEMA public TO postgres;
+ERROR:  relation "alembic_version" already exists
+STATEMENT:  CREATE TABLE alembic_version (
+	    version_num character varying(32) NOT NULL
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.alembic_version OWNER TO luiscosta;
+ERROR:  relation "politics" already exists
+STATEMENT:  CREATE TABLE politics (
+	    "idPolitician" integer NOT NULL,
+	    "publicName" character varying(150),
+	    "completeName" character varying(300),
+	    "startDate" date,
+	    "endDate" date
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.politics OWNER TO luiscosta;
+ERROR:  relation "politics_idPolitician_seq" already exists
+STATEMENT:  CREATE SEQUENCE "politics_idPolitician_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."politics_idPolitician_seq" OWNER TO luiscosta;
+ERROR:  relation "proposals" already exists
+STATEMENT:  CREATE TABLE proposals (
+	    "idProposal" integer NOT NULL,
+	    "nameProposal" character varying(120),
+	    "dateProposal" date,
+	    description character varying(500),
+	    "linkProposal" character varying(200)
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.proposals OWNER TO luiscosta;
+ERROR:  relation "proposals_idProposal_seq" already exists
+STATEMENT:  CREATE SEQUENCE "proposals_idProposal_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public."proposals_idProposal_seq" OWNER TO luiscosta;
+ERROR:  relation "users" already exists
+STATEMENT:  CREATE TABLE users (
+	    uid integer NOT NULL,
+	    firstname character varying(100),
+	    lastname character varying(100),
+	    email character varying(120),
+	    pwdhash character varying(150)
+	);
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users OWNER TO luiscosta;
+ERROR:  relation "users_uid_seq" already exists
+STATEMENT:  CREATE SEQUENCE users_uid_seq
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1;
+ERROR:  role "luiscosta" does not exist
+STATEMENT:  ALTER TABLE public.users_uid_seq OWNER TO luiscosta;
+ERROR:  duplicate key value violates unique constraint "politics_pkey"
+DETAIL:  Key ("idPolitician")=(30) already exists.
+CONTEXT:  COPY politics, line 1
+STATEMENT:  COPY politics ("idPolitician", "publicName", "completeName", "startDate", "endDate") FROM stdin;
+ERROR:  duplicate key value violates unique constraint "proposals_pkey"
+DETAIL:  Key ("idProposal")=(1) already exists.
+CONTEXT:  COPY proposals, line 1
+STATEMENT:  COPY proposals ("idProposal", "nameProposal", "dateProposal", description, "linkProposal") FROM stdin;
+ERROR:  duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(t@t.pt) already exists.
+CONTEXT:  COPY users, line 1
+STATEMENT:  COPY users (uid, firstname, lastname, email, pwdhash) FROM stdin;
+ERROR:  multiple primary keys for table "politics" are not allowed
+STATEMENT:  ALTER TABLE ONLY politics
+	    ADD CONSTRAINT politics_pkey PRIMARY KEY ("idPolitician");
+ERROR:  multiple primary keys for table "proposals" are not allowed
+STATEMENT:  ALTER TABLE ONLY proposals
+	    ADD CONSTRAINT proposals_pkey PRIMARY KEY ("idProposal");
+ERROR:  relation "users_email_key" already exists
+STATEMENT:  ALTER TABLE ONLY users
+	    ADD CONSTRAINT users_email_key UNIQUE (email);
+ERROR:  multiple primary keys for table "users" are not allowed
+STATEMENT:  ALTER TABLE ONLY users
+	    ADD CONSTRAINT users_pkey PRIMARY KEY (uid);
+ERROR:  role "postgres" does not exist
+STATEMENT:  REVOKE ALL ON SCHEMA public FROM postgres;
+ERROR:  role "postgres" does not exist
+STATEMENT:  GRANT ALL ON SCHEMA public TO postgres;
+ERROR:  syntax error at or near "*" at character 15
+STATEMENT:  select * from *;
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down

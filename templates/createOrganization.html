@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero-section">
+    <div class="container">
+
+      <br>
+
+      <div class="container">
+      <h4>Add Organization</h4>
+
+      <form method="POST" action="/create_organization">
+
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.publicName.label }}
+          {{ form.publicName }}
+        </div>
+
+        <div class="form-group">
+          {{ form.completeName.label }}
+          {{ form.completeName }}
+        </div>
+
+       <div class="form-group ">
+         <label class="control-label " for="date"> Date </label>
+         <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
+       </div>
+
+      <div class="form-group ">
+
+        <label class="control-label " for="date2"> Date2 </label>
+
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa "></i>
+          </div>
+          <input class="form-control" id="date2" name="date2" placeholder="DD/MM/YYYY" type="text"/>
+        </div>
+
+      </div>
+
+        {{ form.submit(class="btn-primary") }}
+
+      </form>
+      </div>
+
+
+    </div>
+  </main>
+{% endblock %}

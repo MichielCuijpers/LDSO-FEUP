@@ -1,8 +1,8 @@
 import os
 import flask_whooshalchemy as wa
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
-from models import db, User, Politic
-from forms import SignupForm, LoginForm, PoliticForm
+from models import db, User, Politic, Organization
+from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm
 from flask_login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 
@@ -12,7 +12,7 @@ app = Flask(__name__)
 #print(os.environ['APP_SETTINGS'])
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['WHOOSH_BASE']='whoosh' 
+app.config['WHOOSH_BASE']='whoosh'
 db.init_app(app)
 
 login_manager = LoginManager()
@@ -23,11 +23,7 @@ wa.whoosh_index(app, Politic)
 
 
 
-
-
 ###HELLO TEST
-
-
 
 @login_manager.user_loader
 def user_loader(email):
@@ -83,8 +79,8 @@ def login():
     if form.validate() == False:
       return render_template("login.html", form=form)
     else:
-      email = form.email.data 
-      password = form.password.data 
+      email = form.email.data
+      password = form.password.data
 
       user = User.query.filter_by(email=email).first()
       if user is not None and user.check_password(password):
@@ -112,6 +108,8 @@ def home():
   politics = db.session.query(Politic).all()
   return render_template("home.html", politics= politics)
 
+
+######################## CREATE POLITICIAN ############################
 
 #@app.route("/politician/<int:page>", methods=["GET", "POST"])
 @app.route("/politician/<int:idPolitician>", methods=["GET", "POST"])
@@ -154,12 +152,55 @@ def create_politician():
     return render_template("createPolitician.html", form=form)
 
 
+######################## CREATE ORGANIZATION ############################
+
+@app.route("/organization/<int:idOrganization>", methods=["GET", "POST"])
+@app.route("/organization", methods=["GET", "POST"])
+@login_required
+def organization(idOrganization=1):
+  organization = Organization.query.filter_by(idOrganization=idOrganization).first()
+  print organization
+  form = OrganizationForm()
+
+  if request.method == "POST":
+    if form.validate() == False:
+      return render_template('organization.html', form=form)
+    else:
+      neworganization = Organization(form.publicName.data, form.completeName.data)
+      db.session.add(neworganization)
+      db.session.commit()
+      return redirect(url_for('home'))
+
+  elif request.method == "GET":
+    return render_template("organization.html", form=form, idOrganization=idOrganization, organization=organization)
+
+
+@app.route("/create_organization", methods=["GET", "POST"])
+@login_required
+def create_organization():
+  form = OrganizationForm()
+
+  if request.method == "POST":
+    flash(form.errors)
+    flash(request.form.get('date'))
+    flash(request.form.get('date2'))
+    flash(form.validate())
+    neworganization = Organization(form.publicName.data, form.completeName.data, request.form.get('date'), request.form.get('date2'))
+    db.session.add(neworganization)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+  elif request.method == "GET":
+    return render_template("createOrganization.html", form=form)
+
+
+################################# SEARCH #################################
 @app.route('/search')
 def search():
   politics = Politic.query.whoosh_search(request.args.get('query')).all()
   print politics
 
-  return render_template('home.html', politics=politics)  
+  return render_template('home.html', politics=politics)
 
 
 @app.before_request

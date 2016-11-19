@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: alembic_version; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE alembic_version (
@@ -41,7 +41,7 @@ CREATE TABLE alembic_version (
 ALTER TABLE public.alembic_version OWNER TO luiscosta;
 
 --
--- Name: category; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: category; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE category (
@@ -54,7 +54,7 @@ CREATE TABLE category (
 ALTER TABLE public.category OWNER TO luiscosta;
 
 --
--- Name: domain; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: domain; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE domain (
@@ -70,7 +70,7 @@ CREATE TABLE domain (
 ALTER TABLE public.domain OWNER TO luiscosta;
 
 --
--- Name: organization; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: organization; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE organization (
@@ -85,7 +85,7 @@ CREATE TABLE organization (
 ALTER TABLE public.organization OWNER TO luiscosta;
 
 --
--- Name: politics; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: politics; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE politics (
@@ -98,7 +98,7 @@ CREATE TABLE politics (
 ALTER TABLE public.politics OWNER TO luiscosta;
 
 --
--- Name: position; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: position; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE "position" (
@@ -112,7 +112,7 @@ CREATE TABLE "position" (
 ALTER TABLE public."position" OWNER TO luiscosta;
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: posts; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE posts (
@@ -147,7 +147,7 @@ ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 
 
 --
--- Name: proposals; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: proposals; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE proposals (
@@ -161,7 +161,7 @@ CREATE TABLE proposals (
 ALTER TABLE public.proposals OWNER TO luiscosta;
 
 --
--- Name: role; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: role; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE role (
@@ -173,7 +173,7 @@ CREATE TABLE role (
 ALTER TABLE public.role OWNER TO luiscosta;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 CREATE TABLE users (
@@ -337,7 +337,7 @@ SELECT pg_catalog.setval('users_id_seq', 6, true);
 
 
 --
--- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY category
@@ -345,7 +345,7 @@ ALTER TABLE ONLY category
 
 
 --
--- Name: domain_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: domain_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY domain
@@ -353,7 +353,7 @@ ALTER TABLE ONLY domain
 
 
 --
--- Name: organization_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: organization_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY organization
@@ -361,7 +361,7 @@ ALTER TABLE ONLY organization
 
 
 --
--- Name: politics_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: politics_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY politics
@@ -369,7 +369,7 @@ ALTER TABLE ONLY politics
 
 
 --
--- Name: position_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: position_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY "position"
@@ -377,7 +377,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY posts
@@ -385,7 +385,7 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: proposals_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: proposals_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY proposals
@@ -393,7 +393,7 @@ ALTER TABLE ONLY proposals
 
 
 --
--- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY role
@@ -401,7 +401,7 @@ ALTER TABLE ONLY role
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: luiscosta; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -437,4 +437,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
