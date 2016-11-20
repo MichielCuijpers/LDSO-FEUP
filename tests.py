@@ -24,7 +24,6 @@ class BaseTestCase(TestCase):
      #   db.session.remove()
       #  db.drop_all()
 
-
 class FlaskTestCase(BaseTestCase):
 
     # Ensure that Flask was set up correctly
@@ -37,7 +36,27 @@ class FlaskTestCase(BaseTestCase):
         response = self.client.get('/home', follow_redirects=True)
         self.assertIn(b'Please log in to access this page.', response.data)
 
-   
+    # Ensure that Create Politician page requires user login 
+    def test_createPolitician_route_requires_login(self):
+        response = self.cliente.get('/create_politician', follow_redirects=True)
+        self.assertIn(b'Please log in to access this page.', response.data)
+
+    # Ensure that Edit Politician page requires user login
+    def test_editPolitician_route_requires_login(self):
+        response = self.cliente.get('/edit_politician', follow_redirects=True)
+        self.assertIn(b'Please log in to access this page.', response.data)
+
+    # Ensure that Delete Politician page requires user login
+    def test_deletePolitician_route_requires_login(self):
+        response = self.cliente.get('/delete_politician', follow_redirects=True)
+        self.assertIn(b'Please log in to access this page.', response.data)
+
+    # Ensure that Create Organization page requires user login
+    def test_createOrganization_route_requires_login(self):
+        response = self.cliente.get('/create_organization', follow_redirects=True)
+        self.assertIn(b'Please log in to access this page.', response.data)
+
+
 class UserViewsTests(BaseTestCase):
 
     # Ensure that the login page loads correctly

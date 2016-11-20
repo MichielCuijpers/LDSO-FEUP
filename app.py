@@ -150,6 +150,13 @@ def create_politician():
   elif request.method == "GET":
     return render_template("createPolitician.html", form=form)
 
+@app.route("/edit_politician/<int:idPol>", methods=["POST"])
+@login_required
+def edit_politician(idPol):
+  politician = Politic.query.filter_by(idPolitician=idPol).first()
+  if request.method == "GET":
+    return redirect(url_for("editPolitician.html"))
+
 @app.route("/delete_politician/<int:idPol>", methods=["POST"])
 @login_required
 def delete_politician(idPol):
@@ -209,14 +216,6 @@ def search():
   print politics
 
   return render_template('home.html', politics=politics)
-
-@app.route("/edit_politician/<int:idPol>", methods=["POST"])
-@login_required
-def edit_politician(idPol):
-  politician = Politic.query.filter_by(idPolitician=idPol).first()
-  if request.method == "GET":
-    return redirect(url_for("editPolitician.html"))
-
 
 @app.before_request
 def before_request():
