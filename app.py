@@ -104,7 +104,6 @@ def logout():
 @app.route("/home", methods=["GET", "POST"])
 @login_required
 def home():
-
   politics = db.session.query(Politic).all()
   return render_template("home.html", politics= politics)
 
@@ -151,7 +150,17 @@ def create_politician():
   elif request.method == "GET":
     return render_template("createPolitician.html", form=form)
 
+@app.route("/delete_politician/<int:idPol>", methods=["POST"])
+@login_required
+def delete_politician(idPol):
+  politician = Politic.query.filter_by(idPolitician=idPol).first()
+  print politician
+  if request.method == "POST":
+    db.session.delete(politician)
+    db.session.commit()
+    return redirect(url_for('home'))
 
+<<<<<<< HEAD
 ######################## CREATE ORGANIZATION ############################
 
 @app.route("/organization/<int:idOrganization>", methods=["GET", "POST"])
@@ -201,6 +210,15 @@ def search():
   print politics
 
   return render_template('home.html', politics=politics)
+=======
+
+@app.route("/edit_politician/<int:idPol>", methods=["POST"])
+@login_required
+def edit_politician(idPol):
+  politician = Politic.query.filter_by(idPolitician=idPol).first()
+  if request.method == "GET":
+    return redirect(url_for("editPolitician.html"))
+>>>>>>> a5176305438844447572abad4e56725f548277a6
 
 
 @app.before_request

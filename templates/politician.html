@@ -13,9 +13,13 @@
       <h1>Politician End Date: {{ politician.endDate }}</h1>
 
 
+      <form action="/delete_politician/{{ politician.idPolitician }}" method="post">
+        <input type="submit" value="Delete" />
+      </form>
 
-
+     
 
     </div>
+
   </main>
 {% endblock %}
