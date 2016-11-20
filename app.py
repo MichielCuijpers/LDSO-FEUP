@@ -160,7 +160,6 @@ def delete_politician(idPol):
     db.session.commit()
     return redirect(url_for('home'))
 
-<<<<<<< HEAD
 ######################## CREATE ORGANIZATION ############################
 
 @app.route("/organization/<int:idOrganization>", methods=["GET", "POST"])
@@ -210,7 +209,6 @@ def search():
   print politics
 
   return render_template('home.html', politics=politics)
-=======
 
 @app.route("/edit_politician/<int:idPol>", methods=["POST"])
 @login_required
@@ -218,7 +216,6 @@ def edit_politician(idPol):
   politician = Politic.query.filter_by(idPolitician=idPol).first()
   if request.method == "GET":
     return redirect(url_for("editPolitician.html"))
->>>>>>> a5176305438844447572abad4e56725f548277a6
 
 
 @app.before_request
