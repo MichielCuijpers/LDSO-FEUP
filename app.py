@@ -1,4 +1,5 @@
 import os
+import datetime
 import flask_whooshalchemy as wa
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
 from models import db, User, Politic, Organization
@@ -150,12 +151,29 @@ def create_politician():
   elif request.method == "GET":
     return render_template("createPolitician.html", form=form)
 
-@app.route("/edit_politician/<int:idPol>", methods=["POST"])
+@app.route("/edit_politician/<idPol>", methods=["POST", "GET"])
 @login_required
-def edit_politician(idPol):
+def edit_politician(idPol=1):
+  form = PoliticForm()
   politician = Politic.query.filter_by(idPolitician=idPol).first()
-  if request.method == "GET":
-    return redirect(url_for("editPolitician.html"))
+  if request.method =="POST":
+    politician.publicName=request.form['publicName']
+    politician.completeName=request.form['completeName']
+    if request.form.get('date') != 'None':
+      politician.startDate=datetime.datetime.strptime(request.form.get('date'), '%m/%d/%Y').strftime('%Y-%m-%d')
+      print politician.startDate
+    if request.form.get('date2') != 'None':
+      politician.endDate=datetime.datetime.strptime(request.form.get('date2'), '%m/%d/%Y').strftime('%Y-%m-%d')
+      print politician.endDate
+    db.session.commit()
+    return redirect(url_for('home'))
+  elif request.method == "GET":
+    dateStart=politician.startDate.strftime("%Y-%m-%d")
+    dateEnd=politician.endDate.strftime("%Y-%m-%d")
+
+    politician.startDate=datetime.datetime.strptime(dateStart, '%Y-%m-%d').strftime('%m/%d/%Y')
+    politician.endDate=datetime.datetime.strptime(dateEnd, '%Y-%m-%d').strftime('%m/%d/%Y')
+    return render_template("editPolitician.html", politician=politician)
 
 @app.route("/delete_politician/<int:idPol>", methods=["POST"])
 @login_required
