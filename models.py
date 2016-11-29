@@ -91,3 +91,42 @@ class Proposal(db.Model):
     self.dateProposal = dateProposal.title()
     self.description = description.title()
     self.linkProposal = linkProposal.title()
+
+class Category(db.Model):
+  __tablename__ = 'category'
+
+  idCategory = db.Column(db.Integer, primary_key = True)
+  category = db.Column(db.String(200))
+  description = db.Column(db.String(400))
+
+  def __init__(self, category, description):
+    self.category = category.title()
+    self.description = description.title()
+
+
+class Domain(db.Model):
+  __tablename__= 'domain'
+
+  idDomain = db.Column(db.Integer, primary_key = True)
+  name = db.Column(db.String(120))
+  officialName = db.Column(db.String(200))
+  publicBioLink = db.Column(db.String(200))
+
+
+class Role(db.Model):
+  __tablename__= 'role'
+
+  idRole = db.Column(db.Integer, primary_key = True)
+  name = db.Column(db.String(200))
+
+class Position(db.Model):
+  __tablename__='position'
+
+  idPosition = db.Column(db.Integer, primary_key = True)
+  namePosition = db.Column(db.String(120))
+  dateStart = db.Column(db.Date)
+  dateEnd = db.Column(db.Date)
+  link = db.Column(db.String(200))
+
+
+
