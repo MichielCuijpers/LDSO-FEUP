@@ -28,3 +28,7 @@ class OrganizationForm(FlaskForm):
   startDate = DateField('Start Date', format='%m-%d-%Y', validators=[DataRequired("Please enter the organization start Date.")])
   endDate = DateField('End Date', format='%m-%d-%Y', validators=(validators.Optional(),))
   submit = SubmitField('Add Organization', validators=(validators.Optional(),))
+
+class PostForm(FlaskForm):
+  body = StringField('Body', validators=[DataRequired("Please enter your comment here.")])
+  submit = SubmitField('Add Comment', validators=(validators.Optional(),))

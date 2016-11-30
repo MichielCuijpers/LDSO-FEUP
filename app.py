@@ -2,8 +2,8 @@ import os
 import datetime
 import flask_whooshalchemy as wa
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
-from models import db, User, Politic, Organization
-from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm
+from models import db, User, Politic, Organization, Post
+from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm, PostForm
 from flask_login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 
@@ -117,20 +117,23 @@ def home():
 @login_required
 def politician(idPolitician=1):
   politician = Politic.query.filter_by(idPolitician=idPolitician).first()
-  print politician
+  #print politician
   form = PoliticForm()
+  form2 = PostForm()
 
   if request.method == "POST":
-    if form.validate() == False:
-      return render_template('politician.html', form=form)
+    if form2.validate() == False:
+      return render_template('politician.html', form=form, form2=form2)
     else:
-      newpolitician = Politic(form.publicName.data, form.completeName.data)
-      db.session.add(newpolitician)
+      newPost = Post(form2.body.data)
+      db.session.add(newPost)
       db.session.commit()
       return redirect(url_for('home'))
 
   elif request.method == "GET":
-    return render_template("politician.html", form=form, idPolitician=idPolitician, politician=politician)
+    return render_template("politician.html", form=form, idPolitician=idPolitician, politician=politician, form2=form2)
+
+
 
 @app.route("/create_politician", methods=["GET", "POST"])
 @login_required

@@ -59,6 +59,21 @@ class Politic(db.Model):
     self.endDate = endDate.title()
 
 
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key = True)
+    body = db.Column(db.String(500))
+    timestamp = db.Column(db.DateTime, default = datetime.datetime.utcnow())
+
+    def __init__(self, body):
+        self.body = body.title()
+
+
+
+
+
 class Organization(db.Model):
   __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'organization'
