@@ -69,9 +69,7 @@ def signup():
 def login():
 
   error = None
-  print db
-
-  form = LoginForm()
+  form = LoginForm(request.form)
 
   if current_user.is_authenticated:
     return redirect(url_for('home'))
@@ -80,8 +78,8 @@ def login():
     if form.validate() == False:
       return render_template("login.html", form=form)
     else:
-      email = form.email.data
-      password = form.password.data
+      email = request.form['email']
+      password = request.form['password']
 
       user = User.query.filter_by(email=email).first()
       if user is not None and user.check_password(password):
@@ -89,11 +87,8 @@ def login():
         flash('You were logged in. Go Crazy. ')
         return redirect(url_for('home'))
       else:
-        error = 'Invalid username or password.'
-        return redirect(url_for('login'))
-
-  elif request.method == 'GET':
-    return render_template('login.html', form=form)
+        flash('Invalid username or password.')
+  return render_template('login.html', form=form, error=error)
 
 @app.route("/logout")
 @login_required
