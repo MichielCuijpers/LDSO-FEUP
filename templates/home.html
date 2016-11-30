@@ -2,13 +2,21 @@
 
 {% block content %}
   <main class="hero-section">
-    <div class="container">
-      
-    <h1>Home</h1>
 
     <div class="container">
+
+    <div>
+      We are going to display Politicians here
+    </div>
+
+    <div>
+      We are going to display Organizations here
+    </div>
 
       <a href="{{ url_for('create_politician') }}" class="btn btn-default btn-lg" role="button">Create Politician</a>
+
+
+
       <h3>Politics:</h3>
       {% for politic in politics %}
         <strong>Public Name: </strong>{{politic.publicName}} <br>
@@ -18,13 +26,11 @@
 
         <a href="{{ url_for('edit_politician', idPol=politic.idPolitician) }}" class="btn btn-default btn-sm" role="button">Edit</a>
 
-
         <br>
       {% endfor %}
       </div>
 
 
 
-    </div>
   </main>
 {% endblock %}

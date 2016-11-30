@@ -36,6 +36,8 @@ def user_loader(email):
     return User.query.filter_by(email=email).first()
 
 
+######################## ROUTES ############################
+
 @app.route("/")
 def index():
   return render_template("index.html")
