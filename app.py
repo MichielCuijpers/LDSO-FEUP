@@ -38,9 +38,10 @@ def user_loader(email):
 
 ######################## ROUTES ############################
 
-@app.route("/")
-def index():
-  return render_template("index.html")
+@app.route("/", methods=["GET", "POST"])
+def home():
+  politics = db.session.query(Politic).all()
+  return render_template("home.html", politics= politics)
 
 @app.route("/about")
 def about():
@@ -102,13 +103,7 @@ def login():
 def logout():
   logout_user()
   flash('You were logged out.')
-  return redirect(url_for('index'))
-
-@app.route("/home", methods=["GET", "POST"])
-@login_required
-def home():
-  politics = db.session.query(Politic).all()
-  return render_template("home.html", politics= politics)
+  return redirect(url_for('home'))
 
 
 ######################## CREATE POLITICIAN ############################
