@@ -1,10 +1,12 @@
+from project import app
+
 import unittest
 
 from flask_testing import TestCase
 from flask_login import current_user
 
-from app import app
-from models import db, User
+
+from project.models import db, User
 
 
 class BaseTestCase(TestCase):
@@ -17,7 +19,7 @@ class BaseTestCase(TestCase):
     def setUp(self):
         db.create_all()
        # db.session.add(BlogPost("Test post", "This is a test. Only a test."))
-        db.session.add(User("admin", "admin", "ad@min.com", "admin"))
+        db.session.add(User("admin", "admin", "adm@min.com", "admin"))
         db.session.commit()
 
     def tearDown(self):
@@ -40,7 +42,7 @@ class FlaskTestCase(BaseTestCase):
 
         response = self.client.post(
             '/login',
-            data=dict(email="ad@min.com", password="admin"),
+            data=dict(email="adm@min.com", password="admin"),
             follow_redirects=True
         )
         self.assertIn(b'You were logged in', response.data)
@@ -57,7 +59,7 @@ class FlaskTestCase(BaseTestCase):
     def test_logout(self):
         self.client.post(
             '/login',
-            data=dict(email="ad@min.com", password="admin"),
+            data=dict(email="adm@min.com", password="admin"),
             follow_redirects=True
         )
         response = self.client.get('/logout', follow_redirects=True)

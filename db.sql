@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS proposalstate;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS organizations;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS organization;
+DROP TABLE IF EXISTS alembic_version;
 
 
 CREATE TABLE users (
