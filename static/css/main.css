@@ -12,43 +12,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
-
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
 h2 {
   
   font-weight: 300;
@@ -122,52 +85,6 @@ a {
   text-transform: uppercase;
 }
 
-
-
-/* 
- * Header
- */
-
-header {
-  background-color: #fff;
-  padding: 25px 0;
-}
-
-.title {
-  float: left;
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-}
-
-.title a, .title a:visited {
-  color: #3a3a3a;
-}
-
-.main-nav {
-  float: right;
-}
-
-.main-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.main-nav li {
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.main-nav li a {
-  color: #3a3a3a;
-}
-
-
 /*
  * Hero section 
  */
@@ -184,7 +101,6 @@ header {
 .hero-section .section-content .btn-primary {
   margin-right: 10px;
 }
-
 
 /*
  * Sign up
@@ -252,7 +168,6 @@ header {
 .about-section p {
   font-size: 16px;
 }
-
 
 /* 
  * Home
@@ -323,4 +238,3 @@ header {
 .leaflet-popup-content p {
   margin: 10px 0 ;
 }
-

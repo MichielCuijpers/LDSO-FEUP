@@ -24,8 +24,7 @@ wa.whoosh_index(app, Politic)
 
 
 
-###HELLO TEST
-
+# Login manager
 @login_manager.user_loader
 def user_loader(email):
     """Given *user_id*, return the associated User object.
@@ -38,7 +37,11 @@ def user_loader(email):
 
 ######################## ROUTES ############################
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+def landing():
+  return render_template("landing.html")
+
+@app.route("/home", methods=["GET", "POST"])
 def home():
   politics = db.session.query(Politic).all()
   return render_template("home.html", politics= politics)
