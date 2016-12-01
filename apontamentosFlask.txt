@@ -1,0 +1,45 @@
+<-----TESTS----->
+
+>>> (venv) ipython
+>>> from app import app
+>>> tester = app.test_client()
+>>> response = tester.post('/login', data=dict(username="admin", password="admin"), follow_redirects = True)
+>>> response
+
+
+from models import BlogPost
+posts = BlogPost.query.all()
+
+posts
+
+
+>>> heroku config:set APP_SETTINGS=config.ProductionConfig --remote heroku
+
+>>> heroku run python app.py	
+
+>>> heroku addons:add heroku-postgresql:dev
+
+
+heroku config | grep HEROKU_POSTGRESQL
+
+postgresql://localhost/polex
+export DATABASE_URL='postgres://thrnkjwrkcdrfy:9VqiEgvGY1Skne6JKCpbv5POn8@ec2-54-243-249-149.compute-1.amazonaws.com:5432/dbhc1k1626ugkh'
+export DATABASE_URL="postgres://localhost/polex"
+export APP_SETTINGS="config.DevelopmentConfig"
+
+python manage.py db upgrade
+python manage.py db migrate
+python manage.py db init
+python manage.py runserver
+heroku run python manage.py db upgrade
+
+heroku run python app.py --app polexorg-stage
+heroku run python app.py --app polexorg-pro
+
+Created postgresql-horizontal-92146 as HEROKU_POSTGRESQL_CHARCOAL_URL
+
+git remote add stage git@heroku.com:polexorg-stage.git
+
+PGUSER=luiscosta PGPASSWORD=123456 heroku pg:pull HEROKU_POSTGRESQL_CHARCOAL mylocaldb --app polexorg-stage
+
+
