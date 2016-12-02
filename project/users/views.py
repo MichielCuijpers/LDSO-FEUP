@@ -33,6 +33,7 @@ def signup():
       db.session.commit()
 
       session['email'] = newuser.email
+      login_user(newuser, remember=True)
       return redirect(url_for('home.home'))
 
   elif request.method == "GET":

@@ -3,6 +3,7 @@
 #### imports ####
 #################
 
+
 from flask import Flask, g, flash
 from models import db, User, Politic, Organization
 from flask_login import LoginManager
@@ -16,6 +17,8 @@ from flask_login import LoginManager, UserMixin, \
 ################
 
 app = Flask(__name__)
+
+
 
 #print(os.environ['APP_SETTINGS'])
 app.config.from_object(os.environ['APP_SETTINGS'])
