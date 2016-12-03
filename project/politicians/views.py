@@ -52,12 +52,14 @@ def create_politician():
     flash(request.form.get('date'))
     flash(request.form.get('date2'))
     stDate=datetime.datetime.strptime(request.form.get('date'), '%m/%d/%Y').strftime('%Y-%m-%d')
+    print stDate
     endDate=datetime.datetime.strptime(request.form.get('date2'), '%m/%d/%Y').strftime('%Y-%m-%d')
     flash(form.validate())
     newpolitician = Politic(form.publicName.data, form.completeName.data, stDate,endDate)
     print form.startDate.data
     db.session.add(newpolitician)
     db.session.commit()
+    flash('New entry was successfully posted. Thanks.')
     return redirect(url_for('home.home'))
 
   elif request.method == "GET":
