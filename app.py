@@ -250,10 +250,6 @@ def create_proposal(idPol=1):
     flash(form.validate())
     dateProp=datetime.datetime.strptime(request.form.get('date'), '%m/%d/%Y').strftime('%Y-%m-%d')
     newproposal = Proposal(dateProp, form.description.data, form.linkProposal.data)
-    print newproposal.description
-    print newproposal.dateProposal
-    print newproposal.linkProposal
-    print politician.idPolitician
     newproposal.children.append(politician)
     db.session.add(newproposal)
     db.session.commit()
