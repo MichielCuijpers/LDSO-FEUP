@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="hero-section">
+
+    <div class="container">
+
+    <div>
+      Pretty politicians div
+    </div>
+
+    <div>
+      Pretty organizations div
+    </div>
+
+    {% for politic in politics %}
+        <strong>Public Name: </strong>{{politic.publicName}} <br>
+        <strong>Complete Name: </strong>{{politic.completeName}} <br>
+    {% endfor %}
+
+
+      <h3>Politics:</h3>
+      {% for politic in politics %}
+        <strong>Public Name: </strong>{{politic.publicName}} <br>
+        <strong>Complete Name: </strong>{{politic.completeName}} <br>
+
+        <a href="{{ url_for('politician', idPolitician=politic.idPolitician) }}"  class="btn btn-default btn-sm" role="button"> See Politician </a>
+
+        <a href="{{ url_for('edit_politician', idPol=politic.idPolitician) }}" class="btn btn-default btn-sm" role="button">Edit</a>
+
+        <br>
+      {% endfor %}
+      </div>
+
+
+
+  </main>
+{% endblock %}
