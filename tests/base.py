@@ -1,11 +1,5 @@
 from project import app
-
-import unittest
-
 from flask_testing import TestCase
-from flask_login import current_user
-
-
 from project.models import db, User
 
 
@@ -25,10 +19,3 @@ class BaseTestCase(TestCase):
     def tearDown(self):
         db.session.remove()
         db.drop_all()
-
-
-
-    
-
-    
-

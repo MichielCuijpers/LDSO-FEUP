@@ -41,6 +41,9 @@ class User(db.Model):
   def check_password(self, password):
     return check_password_hash(self.pwdhash, password)
 
+  def __repr__(self):
+        return '<name - {}>'.format(self.firstname)
+
 
 class Politic(db.Model):
   __searchable__ = ['publicName', 'completeName']
