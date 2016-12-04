@@ -8,7 +8,7 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>luiscosta</user-name>
-      <resolve-scope>polex:public,luiscosta</resolve-scope>
+      <resolve-scope>polex:luiscosta,public</resolve-scope>
     </data-source>
   </component>
 </project>

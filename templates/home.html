@@ -10,7 +10,7 @@
     <div class="list-group">
     {% for politic in politics %}
 
-    <a href="{{ url_for('politician', idPolitician=politic.idPolitician) }}" class="list-group-item list-group-item-action">
+    <a href="{{ url_for('politicians.politician', idPolitician=politic.idPolitician) }}" class="list-group-item list-group-item-action">
     <h5 class="list-group-item-heading"><strong>{{politic.publicName}}</strong></h5>
     </a>
 

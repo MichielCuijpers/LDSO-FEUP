@@ -6,3 +6,5 @@ blog
 coverage
 tag.py
 env
+.idea
+logfile

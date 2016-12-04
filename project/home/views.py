@@ -12,7 +12,7 @@ home_blueprint = Blueprint(
 
 @home_blueprint.route("/")
 def index():
-  return render_template("index.html")
+  return render_template("landing.html")
 
 
 @home_blueprint.route("/home", methods=["GET", "POST"])
