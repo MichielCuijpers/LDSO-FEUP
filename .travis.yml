@@ -9,6 +9,3 @@ script: "python manage.py test"
 services:
   - postgresql
 
-test:
-  adapter: postgresql
-  database: polex
