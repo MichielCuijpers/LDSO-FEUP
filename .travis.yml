@@ -9,3 +9,7 @@ script: "python manage.py test"
 services:
   - postgresql
 
+before_script:
+  - cp database.travis.yml database.yml
+  - psql -c 'create database polex;' -U luiscosta
+
