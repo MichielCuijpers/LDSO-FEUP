@@ -28,3 +28,10 @@ class OrganizationForm(FlaskForm):
   startDate = DateField('Start Date', format='%m-%d-%Y', validators=[DataRequired("Please enter the organization start Date.")])
   endDate = DateField('End Date', format='%m-%d-%Y', validators=(validators.Optional(),))
   submit = SubmitField('Add Organization', validators=(validators.Optional(),))
+  
+class ProposalForm(FlaskForm):
+  idPolitician = StringField('Politician id',validators=[DataRequired()])
+  description = StringField('Description', validators=[DataRequired("Please enter proposal description")])
+  dateProposal = DateField('Proposal date', format='%m-%d-%Y', validators=[DataRequired("Please enter the proposal's date")])
+  linkProposal = StringField('Proposal link', validators=[DataRequired("Please enter a valid link to the proposal")])
+  submit = SubmitField('Add Proposal', validators=(validators.Optional(),))

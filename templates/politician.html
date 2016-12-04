@@ -16,9 +16,30 @@
       <form action="/delete_politician/{{ politician.idPolitician }}" method="post">
         <input type="submit" value="Delete" />
       </form>
+     <br>
+
+    </div>
+  </main>
+  <main class="hero-section">
+    <div class="container">
+      
+      <div class="page-header">
+        <h1>Proposals<small></small></h1>
+          <form action="/create_proposal/{{ politician.idPolitician }}" method="get">
+            <input type="submit" value="Create proposal" />
+          </form>
+      </div>
 
      
-
+        {% for proposal in politician.pol_proposals %}
+        <ul>
+          <li>Description: {{proposal.description}}</li>
+          <li>Date of proposal: {{proposal.dateProposal}}</li>
+          <li><a href="{{proposal.linkProposal}}"> Proposal link</a></li>
+        </ul>     
+        <br>
+        {% endfor %}
+      
     </div>
 
   </main>

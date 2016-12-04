@@ -2,8 +2,8 @@ import os
 import datetime
 import flask_whooshalchemy as wa
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
-from models import db, User, Politic, Organization
-from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm
+from models import db, User, Politic, Organization, Proposal
+from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm, ProposalForm
 from flask_login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 
@@ -130,6 +130,8 @@ def politician(idPolitician=1):
       return redirect(url_for('home'))
 
   elif request.method == "GET":
+    for proposal in politician.pol_proposals:
+      print proposal.idProposal
     return render_template("politician.html", form=form, idPolitician=idPolitician, politician=politician)
 
 @app.route("/create_politician", methods=["GET", "POST"])
@@ -159,8 +161,8 @@ def edit_politician(idPol=1):
   form = PoliticForm()
   politician = Politic.query.filter_by(idPolitician=idPol).first()
   if request.method =="POST":
-    politician.publicName=request.form['publicName']
-    politician.completeName=request.form['completeName']
+    politician.publicname=request.form['publicName']
+    politician.completename=request.form['completeName']
     if request.form.get('date') != 'None':
       politician.startDate=datetime.datetime.strptime(request.form.get('date'), '%m/%d/%Y').strftime('%Y-%m-%d')
       print politician.startDate
@@ -170,11 +172,14 @@ def edit_politician(idPol=1):
     db.session.commit()
     return redirect(url_for('home'))
   elif request.method == "GET":
-    dateStart=politician.startDate.strftime("%Y-%m-%d")
-    dateEnd=politician.endDate.strftime("%Y-%m-%d")
-
-    politician.startDate=datetime.datetime.strptime(dateStart, '%Y-%m-%d').strftime('%m/%d/%Y')
-    politician.endDate=datetime.datetime.strptime(dateEnd, '%Y-%m-%d').strftime('%m/%d/%Y')
+    print politician.startDate
+    if politician.startDate is not None:
+      dateStart=politician.startDate.strftime("%Y-%m-%d")
+      politician.startDate=datetime.datetime.strptime(dateStart, '%Y-%m-%d').strftime('%m/%d/%Y')
+    if politician.endDate is not None:
+      dateEnd=politician.endDate.strftime("%Y-%m-%d")
+      politician.endDate=datetime.datetime.strptime(dateEnd, '%Y-%m-%d').strftime('%m/%d/%Y')
+    
     return render_template("editPolitician.html", politician=politician)
 
 @app.route("/delete_politician/<int:idPol>", methods=["POST"])
@@ -227,6 +232,36 @@ def create_organization():
 
   elif request.method == "GET":
     return render_template("createOrganization.html", form=form)
+
+
+
+############################## PROPOSALS #################################
+@app.route("/create_proposal/<int:idPol>", methods=["GET"])
+@app.route("/create_proposal", methods=["POST"])
+@login_required
+def create_proposal(idPol=1):
+  politician = Politic.query.filter_by(idPolitician=idPol).first()
+  form = ProposalForm()
+  if request.method == "GET":
+    form.idPolitician.data=idPol
+    return render_template("createProposal.html",form=form ,idPol=idPol)
+  elif request.method =='POST':
+    flash(form.errors)
+    flash(form.validate())
+    dateProp=datetime.datetime.strptime(request.form.get('date'), '%m/%d/%Y').strftime('%Y-%m-%d')
+    newproposal = Proposal(dateProp, form.description.data, form.linkProposal.data)
+    print newproposal.description
+    print newproposal.dateProposal
+    print newproposal.linkProposal
+    print politician.idPolitician
+    newproposal.children.append(politician)
+    db.session.add(newproposal)
+    db.session.commit()
+    politician2= Politic.query.filter_by(idPolitician=form.idPolitician.data).first()
+    return render_template("politician.html", idPolitician=form.idPolitician.data, politician=politician2)
+
+
+
 
 
 ################################# SEARCH #################################
