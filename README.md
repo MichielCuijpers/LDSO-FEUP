@@ -1,6 +1,6 @@
 # LDSO - POLEX.ORG
 
-[![Build Status](https://travis-ci.org/luistelmocosta/LDSO-FEUP.svg?branch=unitTestsWithCoverage)](https://travis-ci.org/luistelmocosta/LDSO-FEUP)
+[![Build Status](https://travis-ci.org/luistelmocosta/LDSO-FEUP.svg?branch=master)](https://travis-ci.org/luistelmocosta/LDSO-FEUP)
 
 ## You need
 
