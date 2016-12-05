@@ -26,3 +26,6 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    DEBUG = True
+    WTF_CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/polex'

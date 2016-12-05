@@ -85,52 +85,6 @@ a {
   text-transform: uppercase;
 }
 
-
-
-/* 
- * Header
- */
-
-header {
-  background-color: #fff;
-  padding: 25px 0;
-}
-
-.title {
-  float: left;
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-}
-
-.title a, .title a:visited {
-  color: #3a3a3a;
-}
-
-.main-nav {
-  float: right;
-}
-
-.main-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.main-nav li {
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.main-nav li a {
-  color: #3a3a3a;
-}
-
-
 /*
  * Hero section 
  */
@@ -147,7 +101,6 @@ header {
 .hero-section .section-content .btn-primary {
   margin-right: 10px;
 }
-
 
 /*
  * Sign up
@@ -215,7 +168,6 @@ header {
 .about-section p {
   font-size: 16px;
 }
-
 
 /* 
  * Home

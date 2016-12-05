@@ -1,0 +1,147 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+
+
+
+
+      <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+      <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- New Header -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="date"]'); //our date input has the name "date"
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="date2"]'); //our date input has the name "date"
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            })
+        })
+    </script>
+
+    <!-- JS function for alerts -->
+        <script>
+            $(document).ready (function(){
+            $("#success-alert").hide();
+            $("#myWish").click(function showAlert() {
+                $("#success-alert").alert();
+                $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+               $("#success-alert").slideUp(500);
+                });
+            })
+        </script>
+
+
+ });
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/home">POLEX</a>
+        </div>
+
+        <!-- Create options (only authenticated) -->
+        {% if g.user.is_authenticated %}
+        <ul class="nav navbar-nav">
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Create<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/create_politician">Create Politician</a></li>
+              <li><a href="/create_organization">Create Organization</a></li>
+              <li><a href="/createProposal">Create Proposal</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+
+        <!-- Buttons -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/about"><span class="glyphicon glyphicon-plus"></span> About</a></li>
+          {% if not g.user.is_authenticated %}
+          <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+          <form class="navbar-form navbar-left">
+
+          <!-- Search -->
+          <li>
+            <form class="navbar-form" method="GET" action = "search">
+                  <input type="text" class="form-control" placeholder="Search" name="query" id="query">
+                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+            </form>
+          </li>
+          </form>
+          {% if g.user.is_authenticated %}
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    </nav>
+      <header>
+        <div class="container">
+          <!-- messages -->
+
+
+
+
+          
+        </div>
+      </header>
+
+
+
+
+
+      {% block content %}
+      {% endblock %}
+          
+        </div>
+      </header>
+
+
+
+    </body>
+    </html>

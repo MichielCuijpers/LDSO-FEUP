@@ -41,9 +41,15 @@ class User(db.Model):
   def check_password(self, password):
     return check_password_hash(self.pwdhash, password)
 
+<<<<<<< HEAD:models.py
 proposal_politician_association = db.Table('politicsproposals',
   db.Column('idPolitician' ,db.Integer, db.ForeignKey('politics.idPolitician')),
   db.Column('idProposal' ,db.Integer, db.ForeignKey('proposals.idProposal')))
+=======
+  def __repr__(self):
+        return '<name - {}>'.format(self.firstname)
+
+>>>>>>> master:project/models.py
 
 class Politic(db.Model):
   __searchable__ = ['publicName', 'completeName']
