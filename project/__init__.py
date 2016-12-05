@@ -4,13 +4,12 @@
 #################
 
 
-from flask import Flask, g, flash
+from flask import Flask, g
 from models import db, User, Politic, Organization
-from flask_login import LoginManager
 import flask_whooshalchemy as wa
 import os
-from flask_login import LoginManager, UserMixin, \
-                                login_required, login_user, logout_user, current_user
+from flask_login import LoginManager, \
+                               current_user
 
 ################
 #### config ####
