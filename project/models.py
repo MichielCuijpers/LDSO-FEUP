@@ -41,9 +41,15 @@ class User(db.Model):
   def check_password(self, password):
     return check_password_hash(self.pwdhash, password)
 
+<<<<<<< HEAD:models.py
+proposal_politician_association = db.Table('politicsproposals',
+  db.Column('idPolitician' ,db.Integer, db.ForeignKey('politics.idPolitician')),
+  db.Column('idProposal' ,db.Integer, db.ForeignKey('proposals.idProposal')))
+=======
   def __repr__(self):
         return '<name - {}>'.format(self.firstname)
 
+>>>>>>> master:project/models.py
 
 class Politic(db.Model):
   __searchable__ = ['publicName', 'completeName']
@@ -54,6 +60,7 @@ class Politic(db.Model):
   completeName = db.Column(db.String(300))
   startDate = db.Column(db.Date, default = datetime.datetime.utcnow)
   endDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+  
 
   def __init__(self, publicName, completeName, startDate, endDate):
     self.publicName = publicName.title()
@@ -61,7 +68,7 @@ class Politic(db.Model):
     self.startDate = startDate.title()
     self.endDate = endDate.title()
 
-
+ 
 class Organization(db.Model):
   __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'organization'
@@ -80,17 +87,15 @@ class Organization(db.Model):
 
 
 class Proposal(db.Model):
-  __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'proposals'
 
   idProposal = db.Column(db.Integer, primary_key = True)
-  nameProposal = db.Column(db.String(120))
   dateProposal = db.Column(db.Date, default = datetime.datetime.utcnow)
   description = db.Column(db.String(500))
   linkProposal = db.Column(db.String(200))
+  children = db.relationship("Politic", secondary = proposal_politician_association, backref=db.backref('pol_proposals', lazy = 'dynamic'))
 
-  def __init__(self, nameProposal, dateProposal, description, linkProposal):
-    self.nameProposal = nameProposal.title()
+  def __init__(self, dateProposal, description, linkProposal):
     self.dateProposal = dateProposal.title()
     self.description = description.title()
     self.linkProposal = linkProposal.title()

@@ -48,34 +48,34 @@ CREATE TABLE proposalstate (
 SELECT EXTRACT(ISOYEAR FROM CURRENT_TIMESTAMP);
 
 CREATE TABLE proposals (
-    idProposal SERIAL PRIMARY KEY,
+    "idProposal" SERIAL PRIMARY KEY,
    -- nameProposal VARCHAR(120) NOT NULL,
-    description VARCHAR(10000) NOT NULL,
+    "description" VARCHAR(10000) NOT NULL,
     "dateProposal" TIMESTAMP,    
-    linkProposal VARCHAR(1000),
-    idCategory INTEGER REFERENCES category(idCategory) ON DELETE CASCADE,
-    idProposalState INTEGER REFERENCES proposalstate(idProposalState) ON DELETE CASCADE
+    "linkProposal" VARCHAR(1000),
+    "idCategory" INTEGER REFERENCES category(idCategory) ON DELETE CASCADE,
+    "idProposalState" INTEGER REFERENCES proposalstate(idProposalState) ON DELETE CASCADE
 );
 
 CREATE TABLE OrganizationsProposals (
-	idProposal INTEGER NOT NULL REFERENCES proposals(idProposal) ON DELETE CASCADE,
+	"idProposal" INTEGER NOT NULL REFERENCES proposals("idProposal") ON DELETE CASCADE,
 	idOrganization INTEGER NOT NULL REFERENCES organizations(idOrganization) ON DELETE CASCADE,
-	PRIMARY KEY(idOrganization, idProposal)
+	PRIMARY KEY(idOrganization, "idProposal")
 );
 
 CREATE TABLE politics (
-    idPolitician SERIAL PRIMARY KEY,
-    publicName VARCHAR(150) NOT NULL,
-    completeName VARCHAR(300) NOT NULL,
-    publicBioLink TEXT,
+    "idPolitician" SERIAL PRIMARY KEY,
+    "publicName" VARCHAR(150) NOT NULL,
+    "completeName" VARCHAR(300) NOT NULL,
+    "publicBioLink" TEXT,
     "startDate" TIMESTAMP,
     "endDate" TIMESTAMP CHECK ("startDate" < "endDate")
 );
 
 CREATE TABLE PoliticsProposals (
-	idProposal INTEGER NOT NULL REFERENCES proposals(idProposal) ON DELETE CASCADE,
-	idPolitician INTEGER NOT NULL REFERENCES politics(idPolitician) ON DELETE CASCADE,
-	PRIMARY KEY(idPolitician, idProposal)
+	"idProposal" INTEGER NOT NULL REFERENCES proposals("idProposal") ON DELETE CASCADE,
+	"idPolitician" INTEGER NOT NULL REFERENCES politics("idPolitician") ON DELETE CASCADE,
+	PRIMARY KEY("idPolitician", "idProposal")
 );
 
 CREATE TABLE domain (
