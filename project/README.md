@@ -3,7 +3,7 @@
 - [Feature branch workflow](#feature-branch-workflow)
   - [You are creating the branch and starting the feature implementation](#you-are-creating-the-branch-and-starting-the-feature-implementation)
   - [You are helping your colleague implementing a feature](#you-are-helping-your-colleague-implementing-a-feature)
-- [Deploying to Heroku](#deploying-to-Heroku)
+- [Deploying to Heroku](#Deploying-to-Heroku)
 
 
 # Feature branch workflow
@@ -31,7 +31,7 @@
 - Pull the branch  
 `git pull origin US_2-01`
 
-#### Deploying to Heroku
+# Deploying to Heroku
 
 - Add APP_SETTINGS to Heroku config
 `heroku config:set APP_SETTINGS="config.DevelopmentConfig"`
