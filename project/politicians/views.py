@@ -59,7 +59,7 @@ def create_politician():
     print form.startDate.data
     db.session.add(newpolitician)
     db.session.commit()
-    flash('New entry was successfully posted. Thanks.')
+    flash('New entry was successfully posted. Thanks.', 'info')
     return redirect(url_for('home.home'))
 
   elif request.method == "GET":

@@ -1,5 +1,5 @@
 from project.models import db, Politic
-from flask import flash, redirect, render_template, request, \
+from flask import render_template, request, \
     session, url_for, Blueprint
 
 from flask_login import LoginManager, UserMixin, \

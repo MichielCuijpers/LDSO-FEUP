@@ -17,7 +17,7 @@ class TestUser(BaseTestCase):
             ), follow_redirects=True)
             user = User.query.filter_by(email='michael@realpython.com').first()
 
-            self.assertIn(b'Home', response.data)
+            self.assertIn(b'Welcome to POLEX', response.data)
             self.assertTrue(current_user.email == "michael@python.com")
             self.assertTrue(current_user.is_active())
             user = User.query.filter_by(email='michael@realpython.com').first()
