@@ -30,8 +30,6 @@ def create_proposal(idPol=1):
     form.idPolitician.data=idPol
     return render_template("createProposal.html",form=form,idPol=idPol)
   elif request.method =='POST':
-    flash(form.errors)
-    flash(form.validate())
     dateProp=datetime.datetime.strptime(request.form.get('date'), '%m/%d/%Y').strftime('%Y-%m-%d')
     newproposal = Proposal(dateProp, form.description.data, form.linkProposal.data)
     newproposal.children.append(politician)
