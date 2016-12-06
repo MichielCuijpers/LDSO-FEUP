@@ -73,19 +73,16 @@
           <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           {% endif %}
-          <form class="navbar-form navbar-left">
-
           <!-- Search -->
           <li>
-            <form class="navbar-form" method="GET" action = "search">
-                  <input type="text" class="form-control" placeholder="Search" name="query" id="query">
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </button>
-            </form>
-          </li>
-          </form>
           {% if g.user.is_authenticated %}
+            {% if g.user.is_authenticated %}
+            <form class="navbar-form" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, class="search-query")}}</form>
+            {% endif %}
+          {% endif %}
+          </li>
+          {% if g.user.is_authenticated %}
+          <!-- Search -->
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           {% endif %}
         </ul>

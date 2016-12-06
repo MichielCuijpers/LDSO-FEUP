@@ -1,26 +1,194 @@
-import os
-import datetime
-import flask_whooshalchemy as wa
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
-from models import db, User, Politic, Organization
-from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm
+import os
 from flask_login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 
 
+import datetime
+#import flask_whooshalchemy as wa
+#from models import db, User, Politic, Organization
+from config import MAX_SEARCH_RESULTS
+from forms import SignupForm, LoginForm, PoliticForm, OrganizationForm, SearchForm
+import Tkinter as tk
+import tkMessageBox
+
+
 app = Flask(__name__)
+#app.app_context()
 
 #print(os.environ['APP_SETTINGS'])
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['WHOOSH_BASE']='whoosh'
+
+### MODELS.PY ###
+
+from werkzeug import generate_password_hash, check_password_hash
+from flask_sqlalchemy import SQLAlchemy
+
+
+import sys
+if sys.version_info >= (3, 0):
+    enable_search = False
+else:
+    enable_search = True
+    import flask_whooshalchemy as whooshalchemy
+
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+  __tablename__ = 'users'
+  uid = db.Column(db.Integer, primary_key = True)
+  firstname = db.Column(db.String(100))
+  lastname = db.Column(db.String(100))
+  email = db.Column(db.String(120), unique=True)
+  pwdhash = db.Column(db.String(150))
+
+  #-----login requirements-----
+  def is_active(self):
+    #all users are active
+    return True
+
+  def get_id(self):
+        # returns the user e-mail. not sure who calls this
+    return self.email
+
+  def is_authenticated(self):
+  	return True
+
+  def is_anonymous(self):
+        #False as we do not support annonymity
+    return False
+
+  def __init__(self, firstname, lastname, email, password):
+    self.firstname = firstname.title()
+    self.lastname = lastname.title()
+    self.email = email.lower()
+    self.set_password(password)
+
+  def set_password(self, password):
+    self.pwdhash = generate_password_hash(password)
+
+  def check_password(self, password):
+    return check_password_hash(self.pwdhash, password)
+
+
+class Politic(db.Model):
+  __searchable__ = ['publicName', 'completeName']
+  __tablename__ = 'politics'
+
+
+  idPolitician = db.Column(db.Integer, primary_key=True)
+  publicName = db.Column(db.String(150))
+  completeName = db.Column(db.String(300))
+  startDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+  endDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+
+  def __init__(self, publicName, completeName, startDate, endDate):
+    self.publicName = publicName.title()
+    self.completeName = completeName.title()
+    self.startDate = startDate.title()
+    self.endDate = endDate.title()
+  def __repr__(self):
+  	return '<Politic %r>' % (self.publicName)
+
+if enable_search:
+  whooshalchemy.whoosh_index(app, Politic)
+#from app import app
+
+
+
+
+
+class Organization(db.Model):
+  __searchable__ = ['publicname', 'completename']
+  __tablename__ = 'organization'
+
+  idOrganization = db.Column(db.Integer, primary_key=True)
+  publicName = db.Column(db.String(150))
+  completeName = db.Column(db.String(300))
+  startDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+  endDate = db.Column(db.Date, default = datetime.datetime.utcnow)
+
+  def __init__(self, publicName, completeName, startDate, endDate):
+    self.publicName = publicName.title()
+    self.completeName = completeName.title()
+    self.startDate = startDate.title()
+    self.endDate = endDate.title()
+
+
+#from app import app
+
+#if enable_search:
+#  whooshalchemy.whoosh_index(app, Organization)
+
+
+class Proposal(db.Model):
+  __searchable__ = ['publicName', 'completeName']
+  __tablename__ = 'proposals'
+
+  idProposal = db.Column(db.Integer, primary_key = True)
+  nameProposal = db.Column(db.String(120))
+  dateProposal = db.Column(db.Date, default = datetime.datetime.utcnow)
+  description = db.Column(db.String(500))
+  linkProposal = db.Column(db.String(200))
+
+  def __init__(self, nameProposal, dateProposal, description, linkProposal):
+    self.nameProposal = nameProposal.title()
+    self.dateProposal = dateProposal.title()
+    self.description = description.title()
+    self.linkProposal = linkProposal.title()
+
+#from app import app
+#if enable_search:
+#  whooshalchemy.whoosh_index(app, Proposal)
+
+class Category(db.Model):
+  __tablename__ = 'category'
+
+  idCategory = db.Column(db.Integer, primary_key = True)
+  category = db.Column(db.String(200))
+  description = db.Column(db.String(400))
+
+  def __init__(self, category, description):
+    self.category = category.title()
+    self.description = description.title()
+
+
+class Domain(db.Model):
+  __tablename__= 'domain'
+
+  idDomain = db.Column(db.Integer, primary_key = True)
+  name = db.Column(db.String(120))
+  officialName = db.Column(db.String(200))
+  publicBioLink = db.Column(db.String(200))
+
+
+class Role(db.Model):
+  __tablename__= 'role'
+
+  idRole = db.Column(db.Integer, primary_key = True)
+  name = db.Column(db.String(200))
+
+class Position(db.Model):
+  __tablename__='position'
+
+  idPosition = db.Column(db.Integer, primary_key = True)
+  namePosition = db.Column(db.String(120))
+  dateStart = db.Column(db.Date)
+  dateEnd = db.Column(db.Date)
+  link = db.Column(db.String(200))
+
+### MODELS.PY ###
+
 db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-wa.whoosh_index(app, Politic)
+#wa.whoosh_index(app, Politic)
 
 
 
@@ -190,6 +358,7 @@ def delete_politician(idPol):
 @app.route("/organization", methods=["GET", "POST"])
 @login_required
 def organization(idOrganization=1):
+  print "lols"
   organization = Organization.query.filter_by(idOrganization=idOrganization).first()
   print organization
   form = OrganizationForm()
@@ -227,16 +396,37 @@ def create_organization():
 
 
 ################################# SEARCH #################################
-@app.route('/search')
-def search():
-  politics = Politic.query.whoosh_search(request.args.get('query')).all()
-  print politics
+#@app.route('/search')
+#def search():
+ # politics = Politic.query.whoosh_search(request.args.get('query')).all()
+  #print politics
 
-  return render_template('home.html', politics=politics)
+ # return render_template('home.html', politics=politics)
+
+#root = tk.Tk()
+#root.withdraw()
 
 @app.before_request
 def before_request():
     g.user = current_user
+    if g.user.is_authenticated:
+        g.user.last_seen = datetime.datetime.utcnow()
+        db.session.add(g.user)
+        db.session.commit()
+        g.search_form = SearchForm()
+
+@app.route('/search', methods=['GET', 'POST'])
+@login_required
+def search():
+    if not g.search_form.validate_on_submit():
+    	return redirect(url_for('home'))
+    return redirect(url_for('search_results', query=g.search_form.search.data))
+
+@app.route('/search_results/<query>')
+@login_required
+def search_results(query):
+    results = Politic.query.whoosh_search(query, MAX_SEARCH_RESULTS).all()
+    return render_template('search_results.html', query=query, results=results)
 
 if __name__ == "__main__":
   app.run(debug=True)

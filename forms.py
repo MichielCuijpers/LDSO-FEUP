@@ -28,3 +28,6 @@ class OrganizationForm(FlaskForm):
   startDate = DateField('Start Date', format='%m-%d-%Y', validators=[DataRequired("Please enter the organization start Date.")])
   endDate = DateField('End Date', format='%m-%d-%Y', validators=(validators.Optional(),))
   submit = SubmitField('Add Organization', validators=(validators.Optional(),))
+
+class SearchForm(FlaskForm):
+  search = StringField('search', validators=[DataRequired()], render_kw={"placeholder": "Search for Politics"})

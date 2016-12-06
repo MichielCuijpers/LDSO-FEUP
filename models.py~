@@ -1,15 +1,6 @@
-'''
-from werkzeug import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug import generate_password_hash, check_password_hash
 import datetime
-
-
-import sys
-if sys.version_info >= (3, 0):
-    enable_search = False
-else:
-    enable_search = True
-    import flask_whooshalchemy as whooshalchemy
 
 
 db = SQLAlchemy()
@@ -55,10 +46,9 @@ class Politic(db.Model):
   __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'politics'
 
-
-  idPolitician = db.Column(db.Integer, primary_key=True)
-  publicName = db.Column(db.String(150))
-  completeName = db.Column(db.String(300))
+  idpolitician = db.Column(db.Integer, primary_key=True)
+  publicname = db.Column(db.String(150))
+  completename = db.Column(db.String(300))
   startDate = db.Column(db.Date, default = datetime.datetime.utcnow)
   endDate = db.Column(db.Date, default = datetime.datetime.utcnow)
 
@@ -67,12 +57,6 @@ class Politic(db.Model):
     self.completeName = completeName.title()
     self.startDate = startDate.title()
     self.endDate = endDate.title()
-
-#from app import app
-
-if enable_search:
-  whooshalchemy.whoosh_index(app, Politic)
-
 
 
 class Organization(db.Model):
@@ -92,12 +76,6 @@ class Organization(db.Model):
     self.endDate = endDate.title()
 
 
-#from app import app
-
-#if enable_search:
-#  whooshalchemy.whoosh_index(app, Organization)
-
-
 class Proposal(db.Model):
   __searchable__ = ['publicName', 'completeName']
   __tablename__ = 'proposals'
@@ -113,10 +91,6 @@ class Proposal(db.Model):
     self.dateProposal = dateProposal.title()
     self.description = description.title()
     self.linkProposal = linkProposal.title()
-
-#from app import app
-#if enable_search:
-#  whooshalchemy.whoosh_index(app, Proposal)
 
 class Category(db.Model):
   __tablename__ = 'category'
@@ -153,4 +127,6 @@ class Position(db.Model):
   dateStart = db.Column(db.Date)
   dateEnd = db.Column(db.Date)
   link = db.Column(db.String(200))
-'''
+
+
+
