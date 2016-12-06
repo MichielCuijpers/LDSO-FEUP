@@ -35,11 +35,13 @@ from project.users.views import users_blueprint
 from project.home.views import home_blueprint
 from project.politicians.views import politicians_blueprint
 from project.organizations.views import organizations_blueprint
+from project.proposals.views import proposals_blueprint
 # register our blueprints
 app.register_blueprint(users_blueprint)
 app.register_blueprint(home_blueprint)
 app.register_blueprint(politicians_blueprint)
 app.register_blueprint(organizations_blueprint)
+app.register_blueprint(proposals_blueprint)
 
 @app.before_request
 def before_request():
