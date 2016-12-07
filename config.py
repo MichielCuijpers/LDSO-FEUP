@@ -1,6 +1,7 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+MAX_SEARCH_RESULTS = 50
 
 class Config(object):
     DEBUG = False

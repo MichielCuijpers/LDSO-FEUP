@@ -35,3 +35,6 @@ class ProposalForm(FlaskForm):
   dateProposal = DateField('Proposal date', format='%m-%d-%Y', validators=[DataRequired("Please enter the proposal's date")])
   linkProposal = StringField('Proposal link', validators=[DataRequired("Please enter a valid link to the proposal")])
   submit = SubmitField('Add Proposal', validators=(validators.Optional(),))
+
+class SearchForm(FlaskForm):
+  search = StringField('search', validators=[DataRequired()], render_kw={"placeholder": "Search for Politics"})
