@@ -1,8 +1,14 @@
+from project import app
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import generate_password_hash, check_password_hash
 import datetime
+import flask_whooshalchemy as whooshalchemy
 
-db = SQLAlchemy()
+
+
+
+
+db = SQLAlchemy(app)
 
 
 class User(db.Model):
@@ -63,6 +69,12 @@ class Politic(db.Model):
         self.completeName = completeName.title()
         self.startDate = startDate.title()
         self.endDate = endDate.title()
+
+    def __repr__(self):
+        return '<Politic %r>' % (self.publicName)
+
+
+whooshalchemy.whoosh_index(app, Politic)
 
 
 class Organization(db.Model):

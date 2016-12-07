@@ -49,14 +49,15 @@
 
     <!-- JS function for alerts -->
         <script>
-            $(document).ready (function(){
-            $("#success-alert").hide();
-            $("#myWish").click(function showAlert() {
-                $("#success-alert").alert();
-                $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-               $("#success-alert").slideUp(500);
+            $(document).ready (function() {
+                $("#success-alert").hide();
+                $("#myWish").click(function showAlert() {
+                    $("#success-alert").alert();
+                    $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#success-alert").slideUp(500);
+                    });
                 });
-            })
+            });
         </script>
 
 
@@ -93,13 +94,13 @@
 
           <!-- Search -->
           <li>
-            <form class="navbar-form" method="GET" action = "search">
-                  <input type="text" class="form-control" placeholder="Search" name="query" id="query">
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </button>
-            </form>
+          {% if g.user.is_authenticated %}
+                <form style="display: inline;" action="" method="post" name="search">
+                    {{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20) }}
+                    <input type="submit" value="Search"></form>
+          {% endif %}
           </li>
+
           </form>
           {% if g.user.is_authenticated %}
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

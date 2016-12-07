@@ -3,19 +3,22 @@
 #### imports ####
 #################
 
-
+################
+#### config ####
+################
 from flask import Flask, g
-from models import db, User, Politic, Organization
-import flask_whooshalchemy as wa
+app = Flask(__name__)
+
+
+
+from project.models import db, User, Politic, Organization
+import datetime
+from forms import SearchForm
 import os
 from flask_login import LoginManager, \
                                current_user
 
-################
-#### config ####
-################
 
-app = Flask(__name__)
 
 
 
@@ -29,7 +32,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "users.login"
 
-wa.whoosh_index(app, Politic)
+
 
 from project.users.views import users_blueprint
 from project.home.views import home_blueprint
@@ -46,6 +49,10 @@ app.register_blueprint(proposals_blueprint)
 @app.before_request
 def before_request():
     g.user = current_user
+    if g.user.is_authenticated:
+        g.user.last_seen = datetime.datetime.utcnow()
+        g.search_form = SearchForm()
+
 
 @login_manager.user_loader
 def user_loader(email):
