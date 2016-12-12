@@ -1,5 +1,5 @@
 exclude:
-- /
+- /doc
 component_depth: 1
 languages:
 - javascript
